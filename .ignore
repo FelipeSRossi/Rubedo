@@ -1,0 +1,12 @@
+.git
+.vs
+.vscode
+Content
+DerivedDataCache
+Intermediate
+Saved
+Script
+TestBuild
+V
+Plugins/TargetSystem/Content
+Plugins/TargetSystem/Intermediate
