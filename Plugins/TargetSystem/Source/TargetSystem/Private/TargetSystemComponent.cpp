@@ -108,8 +108,9 @@ void UTargetSystemComponent::RefreshWidget()
 	{
 		TargetLockedOnWidgetComponent->DestroyComponent();
 	}
-
-	CreateAndAttachTargetLockedOnWidgetComponent(LockedOnTargetActor);
+	if (LockedOnTargetActor) {
+		CreateAndAttachTargetLockedOnWidgetComponent(LockedOnTargetActor);
+	}
 
 }
 
@@ -402,13 +403,13 @@ void UTargetSystemComponent::CreateAndAttachTargetLockedOnWidgetComponent(AActor
 	}
 
 	TargetLockedOnWidgetComponent = NewObject<UWidgetComponent>(TargetActor, MakeUniqueObjectName(TargetActor, UWidgetComponent::StaticClass(), FName("TargetLockOn")));
-	TargetLockedOnWidgetComponent->SetWidgetClass(LockedOnWidgetClass);
 
 	UMeshComponent* MeshComponent = TargetActor->FindComponentByClass<UMeshComponent>();
 	USceneComponent* ParentComponent = MeshComponent && LockedOnWidgetParentSocket != NAME_None ? MeshComponent : TargetActor->GetRootComponent();
 
 	if (IsValid(OwnerPlayerController))
 	{
+		TargetLockedOnWidgetComponent->SetWidgetClass(LockedOnWidgetClass);
 		TargetLockedOnWidgetComponent->SetOwnerPlayer(OwnerPlayerController->GetLocalPlayer());
 	}
 
